@@ -67,7 +67,6 @@ class BinaryHeap
         array[ hole ] = std::move( array[ 0 ] );
     }
     
-
     /**
      * Insert item x, allowing duplicates.
      */

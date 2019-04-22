@@ -4,19 +4,19 @@
 	Professor: Ioannis Stamos
 	Class: CSCI 335
 	
-	Header file: CreateGraphAndTest.cpp
+	file: CreateGraphAndTest.cpp
+
 	
 	
-	This spell_check program checks for three cases:
-	
-	Removed chaarcters (in every position)
-	Added characters( from a-z) in every position
-	Swapped characters (from index = 0 to the total 
-	of the string)
-	
-	
- Few comments describing the Spell Check Program
+ Few comments describing the CreateGraphAndTest Program
 **/ 
+#include "Graph.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+using namespace std;
+
 
 /*
 
@@ -45,31 +45,41 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
   //Opens file to input 
   
   ifstream file_input;  
-  string line;
+  string line_from_file; 
   file_input.open(words_filename);
   int get_numberofvertices = 0;
+  //Get the number of nodes 
   
   file_input>>get_numberofvertices;
 
   Graph Test(get_numberofvertices);
   //Get the line of 
-  while(getline(file_input,line))
+  while(getline(file_input,line_from_file))
   { 
-
-  	int iteration = 1;
+	/*We want iteration to be 1 because we want to read the number of vertices from the beginning 
+	 *of the first line
+	 */
+  	int iteration = 1; 
   	int vertex = 0;
     int connectedVertex = 0;
     double weight = 0;
-    stringstream strStream(line);
+	//The line from the file in "line_from_file"
+    stringstream strStream(line_from_file);
     while(strStream)
     {
+		//AKA: the first input determines the number of vertices
+		//Therefore it is read only once
     	if(iteration ==1)
+		{
     		strStream>>vertex;
+		}
     	strStream>>connectedVertex;
     	strStream>>weight;
     	if(strStream)
-    		Test.AddEdge(vertex,connectedVertex,weight);
+		{
+    	Test.AddEdge(vertex,connectedVertex,weight);
     	iteration++;
+		}
     }
 
 
