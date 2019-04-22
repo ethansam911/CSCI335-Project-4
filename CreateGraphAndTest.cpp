@@ -62,22 +62,32 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
   	int iteration = 1; 
   	int vertex = 0;
     int connectedVertex = 0;
-    double weight = 0;
+    double weightOfEdge = 0;
 	//The line from the file in "line_from_file"
-    stringstream strStream(line_from_file);
-    while(strStream)
-    {
+    stringstream streamObject(line_from_file);
+    while(streamObject)
+    {	
+		//5<
+		//1 2 0.2 4 10.1 5 0.5
 		//AKA: the first input determines the number of vertices
 		//Therefore it is read only once
     	if(iteration ==1)
 		{
-    		strStream>>vertex;
+		//5
+		//1< 2 0.2 4 10.1 5 0.5
+    	streamObject>>vertex;
 		}
-    	strStream>>connectedVertex;
-    	strStream>>weight;
-    	if(strStream)
+		//5
+		//1 2< 0.2 4 10.1 5 0.5
+		//^^This is the connected vertex^^
+    	streamObject>>connectedVertex;
+		//5
+		//1 2 0.2< 4 10.1 5 0.5
+		//^^This is the weight of the edge connecting the two previous vertexes^^
+    	streamObject>>weightOfEdge;
+    	if(streamObject)
 		{
-    	Test.AddEdge(vertex,connectedVertex,weight);
+    	Test.AddEdge(vertex,connectedVertex,weightOfEdge);
     	iteration++;
 		}
     }
@@ -96,10 +106,10 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
   {
   	checkfile>>vertex1;
   	checkfile>>vertex2;
-  	double weight = Test.CheckConnection(vertex1,vertex2);
-  	if(weight>0)
+  	double weightOfEdge = Test.CheckConnection(vertex1,vertex2);
+  	if(weightOfEdge>0)
   	{
-  		cout<< vertex1<<" "<<vertex2<<": Connected, weight of edge is "<<(weight/1.0)<<endl;
+  		cout<< vertex1<<" "<<vertex2<<": Connected, weight of edge is "<<(weightOfEdge/1.0)<<endl;
   	}
 
   	else
