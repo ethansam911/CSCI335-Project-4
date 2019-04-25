@@ -48,10 +48,10 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
   string line_from_file; 
   file_input.open(words_filename);
   int get_numberofvertices = 0;
-  //Get the number of nodes 
   
+  //Get the number of nodes in this adjacency list
   file_input>>get_numberofvertices;
-
+  // Create an object Test of type Graph
   Graph Test(get_numberofvertices);
   //Get the line of 
   while(getline(file_input,line_from_file))
@@ -67,16 +67,14 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
     stringstream streamObject(line_from_file);
     while(streamObject)
     {	
-		//5<
-		//1 2 0.2 4 10.1 5 0.5
+		//5 (read already)
+		//1< 2 0.2 4 10.1 5 0.5
 		//AKA: the first input determines the number of vertices
 		//Therefore it is read only once
     	if(iteration ==1)
-		{
 		//5
 		//1< 2 0.2 4 10.1 5 0.5
     	streamObject>>vertex;
-		}
 		//5
 		//1 2< 0.2 4 10.1 5 0.5
 		//^^This is the connected vertex^^
@@ -86,18 +84,19 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
 		//^^This is the weight of the edge connecting the two previous vertexes^^
     	streamObject>>weightOfEdge;
     	if(streamObject)
-		{
+		//We use the newly implemented addEdge
     	Test.AddEdge(vertex,connectedVertex,weightOfEdge);
     	iteration++;
-		}
+		
     }
-
-
   }
+
+
+  
   
   cout<<"Successful input."<<endl;
 
-  int vertex1 =0;
+  int vertex1 =0; 
   int vertex2 =0;
   ifstream checkfile; 
   checkfile.open(query_filename);
@@ -119,7 +118,7 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
 } 
 
 
-//./CreateGraphAndTest Graph1.txt AdjacencyQueries.txt
+//./CreateGraphAndTest Graph1.txt AdjacencyQueries1.txt
 //./FindPaths <GRAPH_FILE> <STARTING_VERTEX>
 /*
 
@@ -136,14 +135,15 @@ We have graphs1 -graphs3
 
 int main(int argc, char **argv) 
 {
-  if (argc != 3) {
+  if (argc != 3) 
+  {
     cout << "Usage: " << argv[0] << " <InputFile> <SearchFile>" << endl;
     return 0;
   }
   
   const string words_filename(argv[1]);
   const string query_filename(argv[2]);
-  TestGraphInsert(words_filename, query_filename);    
+  TestFunctionForGraph(words_filename, query_filename);    
 
   return 0;
 }
