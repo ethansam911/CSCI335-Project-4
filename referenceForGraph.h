@@ -1,5 +1,4 @@
 /*
-Svetleen Guerrier
 Ioannis Stamos
 CSCI335
 Spring 2017
@@ -186,9 +185,9 @@ public:
 	If not connected -1 will indicate that its not.
 	*/
 	double CheckConnection(int vertex1, int vertex2)
-	{
+	{	//[vertex-1] checks the previous vertex, the previous vertex(node) that points to vertex1 
 		Vertex* check = list_Vertex[vertex1-1];
-
+		//const auto references 
 		const auto& checklist = check->Aj;
 		for(auto i = checklist.begin(); i!= checklist.end();i++)
 		{

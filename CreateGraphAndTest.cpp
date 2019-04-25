@@ -10,7 +10,7 @@
 	
  Few comments describing the CreateGraphAndTest Program
 **/ 
-#include "Graph.h"
+#include "graph.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -119,7 +119,16 @@ void TestFunctionForGraph(const string &words_filename, const string &query_file
 } 
 
 
+//./CreateGraphAndTest Graph1.txt AdjacencyQueries.txt
+//./FindPaths <GRAPH_FILE> <STARTING_VERTEX>
+/*
 
+
+Your program should run as follows:
+./TestRandomGraph <maximum_number_of_nodes>
+For example to check for a graph of 100 nodes you should run
+./TestRandoGraph 100
+*/
 
 /*
 We have graphs1 -graphs3
